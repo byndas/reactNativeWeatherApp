@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
+
 import OpenWeatherMap from './open_weather_map';
 import Forecast from './Forecast';
 
@@ -13,8 +14,7 @@ class WeatherApp extends Component {
   _handleTextChange = event => {
     let zip = event.nativeEvent.text;
     OpenWeatherMap.fetchForecast(zip).then(forecast => {
-      // console.log(forecast);
-      this.setState({ zip: event.nativeEvent.text });
+      this.setState({ forecast: forecast });
     });
   };
 
@@ -29,17 +29,29 @@ class WeatherApp extends Component {
         />
       );
     }
-
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          You input {this.state.zip}.
-        </Text>
-        {content}
-        <TextInput 
-          style={styles.input}
-          onSubmitEditing={this._handleTextChange}
-        />
+        <Image
+          source={require('./flowers.png')}
+          resizeMode='cover'
+          style={styles.backdrop} 
+        >
+          <View style={styles.overlay}>
+            <View style={styles.row}>
+              <Text style={styles.mainText}>
+                Current weather for
+              </Text>
+              <View style={styles.zipContainer}>
+                <TextInput 
+                  style={[styles.zipCode, styles.mainText]}
+                  onSubmitEditing={this._handleTextChange}
+                  underlineColorAndroid='transparent'
+                />
+              </View>
+            </View>
+            {content}
+          </View>
+        </Image>
       </View>
     );
   }
