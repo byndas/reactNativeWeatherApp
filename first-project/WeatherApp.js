@@ -80,3 +80,5 @@ const styles = StyleSheet.create({
 });
 
 export default WeatherApp;
+
+// github.com/bonniee/learning-react-native
