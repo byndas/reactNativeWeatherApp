@@ -1,7 +1,7 @@
-import WeatherProject from '..WeatherApp';
-
 import React, {Component} from 'react';
+
 import { StyleSheet, Text, View, TextInput } from 'react-native';
+import Forecast from './Forecast';
 
 class WeatherApp extends Component {
   constructor(props) {
@@ -12,6 +12,17 @@ class WeatherApp extends Component {
     }
   }
   render() {
+    let context = null;
+    if (this.state.forecast != null) {
+      content = (
+        <Forecast
+          main={this.state.forecast.main}
+          description={this.state.forecast.description}
+          temp={this.state.forecast.temp}
+        />
+      );
+    }
+
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -42,7 +53,10 @@ const styles = StyleSheet.create({
   input: {
     fontSize: 20,
     borderWidth: 2,
+    padding: 2,
     height: 40,
+    width: 100,
+    textAlign: 'center'
   },
 });
 
