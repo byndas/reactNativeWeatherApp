@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import { StyleSheet, Text, View, TextInput } from 'react-native';
+import OpenWeatherMap from './open_weather_map';
 import Forecast from './Forecast';
 
 class WeatherApp extends Component {
