@@ -12,7 +12,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Text style={styles.welcome}>
-        
+        You input {this.state.zip}.
       </Text>
     );
   }
@@ -24,5 +24,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  input: {
+    fontSize: 20,
+    borderWidth: 2,
+    height: 40,
   },
 });
