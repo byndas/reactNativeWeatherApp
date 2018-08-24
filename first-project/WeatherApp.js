@@ -8,10 +8,16 @@ class WeatherApp extends Component {
   constructor(props) {
     super(props);
     this.state = { zip: '', forecast: null };
-    _handleTextChange = event => {
-      this.setState({ zip: event.nativeEvent.text });
-    }
   }
+
+  _handleTextChange = event => {
+    let zip = event.nativeEvent.text;
+    OpenWeatherMap.fetchForecast(zip).then(forecast => {
+      // console.log(forecast);
+      this.setState({ zip: event.nativeEvent.text });
+    });
+  };
+
   render() {
     let context = null;
     if (this.state.forecast != null) {
@@ -29,6 +35,7 @@ class WeatherApp extends Component {
         <Text style={styles.welcome}>
           You input {this.state.zip}.
         </Text>
+        {content}
         <TextInput 
           style={styles.input}
           onSubmitEditing={this._handleTextChange}
@@ -41,14 +48,13 @@ class WeatherApp extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#666666',
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    alignItems: 'center',
     margin: 10,
   },
   input: {
